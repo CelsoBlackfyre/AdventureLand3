@@ -1,48 +1,62 @@
 import React from "react";
 import { useState } from "react";
+import ModalComida from "../components/ModalComida.jsx";
+import ModalBebida from "../components/ModalBebidas.jsx";
 import {
-	MDBNavbar,
-	MDBNavbarNav,
-	MDBNavbarItem,
-	MDBNavbarBrand,
-	MDBNavbarLink,
-	MDBNavbarToggler,
-	MDBContainer,
-	MDBCardFooter,
-	MDBCardGroup,
-	MDBCardImage,
-	MDBCardText,
-	MDBModalContent,
-	MDBModalBody,
-	MDBModalHeader,
-	MDBModal,
-	MDBBtn,
-	MDBModalTitle,
-	MDBModalFooter,
+	MDBCard,
 	MDBCardBody,
 	MDBCardTitle,
-	MDBCard,
-	MDBModalDialog,
-	MDBRow,
+	MDBCardText,
+	MDBBtn,
 	MDBCol,
-	MDBIcon,
-	MDBCollapse,
+	MDBRow,
 } from "mdb-react-ui-kit";
-import "./App.css";
 import girltea from "../src/video/japanesetea.mp4";
 import foodexample from "../src/video/japanesefood.mp4";
-import okonomiyakiimg from "../src/imagens/okonomiyakiimg.jpg";
-import uramakisushi from "../src/imagens/uramakisushiimg.jpg";
-import yakitori from "../src/imagens/yakitoriimg.jpg";
-import tempura from "../src/imagens/tempuraimg.jpg";
-import sashimi from "../src/imagens/sashimiimg.jpg";
-import udon from "../src/imagens/udonimg.jpg";
-import tonkatsu from "../src/imagens/Tonkatsu img.jpg";
-import takoyaki from "../src/imagens/Takoyakiimg.jpeg";
+import "../src/App.css";
 
 export default function Alimentacao() {
-	const [staticModal, setStaticModal] = useState(false);
+	return (
+		<>
+			<MDBRow>
+				<MDBCol>
+					<MDBCard className="h-100" style={{ backgroundColor: "#191919" }}>
+						<video className="h-100" autoPlay loop muted>
+							<source src={girltea} type="video/mp4" />
+						</video>
+						<MDBCardBody>
+							<MDBCardTitle
+								className="text-center fs-1"
+								style={{ color: "red" }}>
+								Comidas
+							</MDBCardTitle>
+							<MDBCardText className="fs-4 text-white">
+								Veja o melhor que a culinaria japonesa pode oferecer.
+							</MDBCardText>
+						</MDBCardBody>
+						<MDBBtn onClick={ModalBebida}>Confira</MDBBtn>;
+					</MDBCard>
+				</MDBCol>
+				<MDBCol>
+					<MDBCard className="h-100" style={{ backgroundColor: "#191919" }}>
+						<video className="h-100" autoPlay loop muted>
+							<source src={foodexample} type="video/mp4" />
+						</video>
+						<MDBCardBody>
+							<MDBCardTitle
+								className="text-center fs-1"
+								style={{ color: "red" }}>
+								Comidas
+							</MDBCardTitle>
+							<MDBCardText className="fs-4 text-white">
+								Veja o melhor que a culinaria japonesa pode oferecer.
+							</MDBCardText>
+						</MDBCardBody>
 
-	const toggleOpen = () => setStaticModal(!staticModal);
-	return <></>;
+						<MDBBtn onClick={ModalComida}>Confira</MDBBtn>
+					</MDBCard>
+				</MDBCol>
+			</MDBRow>
+		</>
+	);
 }

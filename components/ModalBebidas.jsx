@@ -28,12 +28,15 @@ import {
 	MDBIcon,
 	MDBCollapse,
 } from "mdb-react-ui-kit";
-import "./App.css";
 import girltea from "../src/video/japanesetea.mp4";
 import kombucha from "../src/imagens/kombuchaimg.jpg";
 import aojiru from "../src/imagens/aojiruimg.jpg";
+import sakuratea from "../src/imagens/sakuracha.jpg";
+import uroncha from "../src/imagens/uronchaimg.jpg";
+import ofukucha from "../src/imagens/Obukuchaimg.jpg";
+import mugicha from "../src/imagens/mugichaimg.jpg";
 
-export default function ModalComida() {
+export default function ModalBebida() {
 	const [staticModal, setStaticModal] = useState(false);
 
 	const toggleOpen = () => setStaticModal(!staticModal);
@@ -63,209 +66,164 @@ export default function ModalComida() {
 									Veja o melhor que a culinaria japonesa pode oferecer.
 								</MDBCardText>
 							</MDBCardBody>
-
-							<MDBBtn onClick={toggleOpen}>Confira</MDBBtn>
-
-							<MDBModal
-								staticBackdrop
-								tabIndex="-1"
-								open={staticModal}
-								onClose={() => setStaticModal(false)}>
-								<MDBModalDialog size="xl">
-									<MDBModalContent>
-										<MDBModalHeader>
-											<MDBModalTitle>Comida</MDBModalTitle>
-											<MDBBtn
-												className="btn-close"
-												color="none"
-												onClick={toggleOpen}></MDBBtn>
-										</MDBModalHeader>
-										<MDBModalBody style={{ backgroundColor: "#191919" }}>
-											<MDBRow className="row-cols-1 row-cols-md-3 g-4">
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={kombucha}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Kombucha
-															</MDBCardTitle>
-															<MDBCardText className="text-white fs-5">
-																Kombucha é um chá geralmente preto ou verde,
-																contém açucar, bacteria saudavel e levedura. A
-																fermentação ocorre de uma semana até um mês, tem
-																gosto parecido com vinagre.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 15,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={aojiru}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Aojiru
-															</MDBCardTitle>
-															<MDBCardText className="text-white fs-5">
-																Aojiru
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={yakitori}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody style={{ backgroundColor: "#191919" }}>
-															<MDBCardTitle className="text-danger">
-																Yakitori
-															</MDBCardTitle>
-															<MDBCardText className="text-white fs-5">
-																Yakitori é uma espécie de frango grelhado tipo
-																do Japão, banhado pelo famoso molho Yakitori.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={tempura}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Tempura
-															</MDBCardTitle>
-															<MDBCardText className="text-white fs-5">
-																Tempua consiste em um prato japonês feito de
-																frutos do mar e vegetais, são fritos e se trate
-																de um prato bem antigo.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={sashimi}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Sashimi
-															</MDBCardTitle>
-															<MDBCardText className="fs-5 text-white">
-																Se trata de um prato feito de carnes cruas
-																fatiadas, geralmente peixe e frutos do mar mas
-																vezes outros tipos de carne.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage src={udon} alt="..." position="top" />
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Udon
-															</MDBCardTitle>
-															<MDBCardText className="fs-5 text-white">
-																Udon é um macarrão grosso servido com diversos
-																molhos ou até mesmo frios. Geralmente é feito
-																com sopa.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={tonkatsu}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Tonkatsu
-															</MDBCardTitle>
-															<MDBCardText className="fs-5 text-white">
-																Tonkatsu é um prato japonês que consite um
-																pedaço de porco frito tem óleo, os principais
-																tipos são filé e lombo.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-												<MDBCol>
-													<MDBCard style={{ backgroundColor: "#191919" }}>
-														<MDBCardImage
-															src={takoyaki}
-															alt="..."
-															position="top"
-														/>
-														<MDBCardBody>
-															<MDBCardTitle className="text-danger">
-																Takoyaki
-															</MDBCardTitle>
-															<MDBCardText className="fs-5 text-white">
-																Se trata de um prato feito de carnes cruas
-																fatiadas, geralmente peixe e frutos do mar mas
-																vezes outros tipos de carne.
-															</MDBCardText>
-														</MDBCardBody>
-														<MDBCardFooter>
-															<h4 className="text-danger">R$ 25,00</h4>
-														</MDBCardFooter>
-													</MDBCard>
-												</MDBCol>
-											</MDBRow>
-										</MDBModalBody>
-										<MDBModalFooter>
-											<MDBBtn color="secondary" onClick={toggleOpen}>
-												Fechar
-											</MDBBtn>
-											<MDBBtn className="btn btn-danger">
-												Tenho Interesse
-											</MDBBtn>
-										</MDBModalFooter>
-									</MDBModalContent>
-								</MDBModalDialog>
-							</MDBModal>
 						</MDBCard>
+						<MDBBtn onClick={toggleOpen}>Confira</MDBBtn>
+
+						<MDBModal
+							staticBackdrop
+							tabIndex="-1"
+							open={staticModal}
+							onClose={() => setStaticModal(false)}>
+							<MDBModalDialog size="xl">
+								<MDBModalContent>
+									<MDBModalHeader>
+										<MDBModalTitle>Comida</MDBModalTitle>
+										<MDBBtn
+											className="btn-close"
+											color="none"
+											onClick={toggleOpen}></MDBBtn>
+									</MDBModalHeader>
+									<MDBModalBody style={{ backgroundColor: "#191919" }}>
+										<MDBRow className="row-cols-1 row-cols-md-3 g-4">
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage
+														src={kombucha}
+														alt="..."
+														position="top"
+													/>
+													<MDBCardBody>
+														<MDBCardTitle className="text-danger">
+															Kombucha
+														</MDBCardTitle>
+														<MDBCardText className="text-white fs-5">
+															Kombucha é um chá geralmente preto ou verde,
+															contém açucar, bacteria saudavel e levedura. A
+															fermentação ocorre de uma semana até um mês, tem
+															gosto parecido com vinagre.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage src={aojiru} alt="..." position="top" />
+													<MDBCardBody>
+														<MDBCardTitle className="text-danger">
+															Aojiru
+														</MDBCardTitle>
+														<MDBCardText className="text-white fs-5">
+															Aojiru é uma bebida feita de vegetaism também é
+															conhecida como bebida verde ou suco verde.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage
+														src={sakuratea}
+														alt="..."
+														position="top"
+													/>
+													<MDBCardBody style={{ backgroundColor: "#191919" }}>
+														<MDBCardTitle className="text-danger">
+															Chá de Sakura
+														</MDBCardTitle>
+														<MDBCardText className="text-white fs-5">
+															Chá de Sakura é feito de flores de cerejeira, é
+															muito popular no Japão. Tem um sabor suave, doce e
+															floral e contém um bom aroma.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage
+														src={uroncha}
+														alt="..."
+														position="top"
+													/>
+													<MDBCardBody>
+														<MDBCardTitle className="text-danger">
+															Uroncha
+														</MDBCardTitle>
+														<MDBCardText className="text-white fs-5">
+															Uronha é um chá, é feito com um processo de
+															oxidação diferente que faz com que o gosto das
+															flores seja mais forte.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage
+														src={ofukucha}
+														alt="..."
+														position="top"
+													/>
+													<MDBCardBody>
+														<MDBCardTitle className="text-danger">
+															Ofukucha
+														</MDBCardTitle>
+														<MDBCardText className="fs-5 text-white">
+															Ofukucha é conhecido como chá de boa sorte, é
+															feito com chá verde como normalmente e depois
+															adiciona kombu seco e urna seca.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+											<MDBCol>
+												<MDBCard style={{ backgroundColor: "#191919" }}>
+													<MDBCardImage
+														src={mugicha}
+														alt="..."
+														position="top"
+													/>
+													<MDBCardBody>
+														<MDBCardTitle className="text-danger">
+															Mugicha
+														</MDBCardTitle>
+														<MDBCardText className="fs-5 text-white">
+															Mugicha é ima bebida sem cafína feita através de
+															cevada assada. Tem um gosto parecido com café. É
+															servida fria ou quente.
+														</MDBCardText>
+													</MDBCardBody>
+													<MDBCardFooter>
+														<h4 className="text-danger">R$ 15,00</h4>
+													</MDBCardFooter>
+												</MDBCard>
+											</MDBCol>
+										</MDBRow>
+									</MDBModalBody>
+									<MDBModalFooter>
+										<MDBBtn color="secondary" onClick={toggleOpen}>
+											Fechar
+										</MDBBtn>
+										<MDBBtn className="btn btn-danger">Tenho Interesse</MDBBtn>
+									</MDBModalFooter>
+								</MDBModalContent>
+							</MDBModalDialog>
+						</MDBModal>
 					</MDBCol>
 				</MDBRow>
 			</MDBContainer>

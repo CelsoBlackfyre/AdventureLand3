@@ -17,11 +17,11 @@ function App() {
 		<>
 			<div className="App">
 				<Alimentacao />
-				<AppHeader />
+				{/* <AppHeader />
 				<Loja />
 				<LoginForm />
 				<CadastroForm />
-				<Footer />
+				<Footer /> */}
 			</div>
 		</>
 	);
