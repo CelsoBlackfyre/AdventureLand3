@@ -17,7 +17,7 @@ function AppHeader() {
 
 	return (
 		<>
-			<MDBNavbar expand="lg" dark style={{ backgroundColor: "#000000" }}>
+			<MDBNavbar expand="lg" dark style={{ backgroundColor: "#191919" }}>
 				<MDBContainer fluid>
 					<MDBNavbarBrand href="#">Adventure Land</MDBNavbarBrand>
 
@@ -33,24 +33,37 @@ function AppHeader() {
 					<MDBCollapse open={openNavColorSecond} navbar id="navbarColor02">
 						<MDBNavbarNav className="me-auto mb-2 mb-lg-0">
 							<MDBNavbarItem className="active">
-								<MDBNavbarLink aria-current="page" href="#">
+								<MDBNavbarLink
+									aria-current="page"
+									href="#"
+									className="text-white">
 									Home
 								</MDBNavbarLink>
 							</MDBNavbarItem>
 							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Loja</MDBNavbarLink>
+								<MDBNavbarLink href="#" className="text-white">
+									Loja
+								</MDBNavbarLink>
 							</MDBNavbarItem>
 							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Alimentacao</MDBNavbarLink>
+								<MDBNavbarLink href="#" className="text-white">
+									Alimentacao
+								</MDBNavbarLink>
 							</MDBNavbarItem>
 							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Sobre</MDBNavbarLink>
+								<MDBNavbarLink href="#" className="text-white">
+									Sobre
+								</MDBNavbarLink>
 							</MDBNavbarItem>
 							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Conta</MDBNavbarLink>
+								<MDBNavbarLink href="#" className="text-white">
+									Conta
+								</MDBNavbarLink>
 							</MDBNavbarItem>
 							<MDBNavbarItem>
-								<MDBNavbarLink href="#">Socio</MDBNavbarLink>
+								<MDBNavbarLink href="#" className="text-white">
+									Socio
+								</MDBNavbarLink>
 							</MDBNavbarItem>
 						</MDBNavbarNav>
 					</MDBCollapse>
