@@ -1,0 +1,7 @@
+$myFont: red;
+
+body {
+	font-family: $myFont;
+}
+
+@import "bootstrap/scss/bootstrap.scss";
