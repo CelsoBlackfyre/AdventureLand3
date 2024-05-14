@@ -4,6 +4,7 @@ import { MDBInput } from "mdb-react-ui-kit";
 import "./Custom.css";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import "./form.css";
 
 const CadastroForm = () => {
 	// const [errors, setErros] = useState({});
@@ -41,7 +42,17 @@ const CadastroForm = () => {
 		handleSubmit,
 		formState,
 		formState: { errors },
-	} = useForm();
+	} = useForm({
+		defaultValues: {
+			nome: "",
+			email: "",
+			idade: "",
+			senha: "",
+			confirmarSenha: "",
+			cidade: "",
+			estado: "",
+		},
+	});
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -82,9 +93,6 @@ const CadastroForm = () => {
 							name="nome"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{errors.nome && (
-							<span className="error-message">Nome obrigatório</span>
-						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">E-mail</Form.Label>
@@ -96,7 +104,9 @@ const CadastroForm = () => {
 								message: "Email obrigatorio ou invalido",
 								required: true,
 								pattern:
-									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,{
+									setErros({ email: "Email obrigatorio ou invalido" });
+									}
 							})}
 							type="email"
 							style={{ width: "300px", alignContent: "center" }}
