@@ -7,7 +7,7 @@ import AppHeader from "../src/Header.jsx";
 import Alimentacao from "./Alimentacao.jsx";
 import LoginForm from "./LoginForm.jsx";
 import Footer from "../components/footer/footer.jsx";
-import Formulario from "../src/Formulario.jsx";
+import Formulario from "./Formulario.jsx";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import CadastroForm from "./CadastroForm.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

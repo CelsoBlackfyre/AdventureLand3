@@ -1,40 +1,250 @@
+import { Button, Form, Container } from "react-bootstrap";
 import React from "react";
+import { MDBInput } from "mdb-react-ui-kit";
+import "./Custom.css";
 import { useForm } from "react-hook-form";
-import { withRouter } from "react-router-dom";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const AddUsuario = () => {
-	var [name, setName] = useState();
-	const nomeUpdate = (event) => {
-		setNome(event.target.value);
+const CadastroForm = () => {
+	// const [errors, setErros] = useState({});
+
+	const validarForm = (dados) => {
+		const errors = {};
+
+		if (!dados.nome.trim()) {
+			errors.nome = "Nome de usuario é necessario";
+		}
+
+		if (!dados.email.trim()) {
+			errors.email = "Email é necessario";
+		} else if (!/\S+@\S+\.\S+/.test(dados.email)) {
+			errors.email = "Email é invalido";
+		}
+
+		if (!dados.idade.trim()) {
+			errors.idade = "A idade é necessaria";
+		} else if (dados.idade > 100 && dados.idade << 0)
+			if (!dados.senha) {
+				errors.senha = "Senha é necessaria";
+			} else if (dados.senha.length < 8) {
+				errors.senha = "Senha deve ter pelo menos 8 caracteres";
+			}
+
+		if (dados.confirmarSenha !== dados.senha) {
+			errors.confirmarSenha = "Senhas não são iguais";
+		}
+		return errors;
 	};
 
-	const handleSubmit = () => {
-		const postURL = "http://localhost:4000/api/teste2/";
-		fetch(postURL, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				name: nome,
-				clockedIn: false,
-				dates: [],
-			}),
-		}).then(() => {
-			alert("ADICIONADO NO SISTEMA PARABENS");
-		});
+	const {
+		register,
+		handleSubmit,
+		formState,
+		formState: { errors },
+	} = useForm();
+
+	const onSubmit = (data) => {
+		console.log(data);
 	};
+	React.useEffect(() => {
+		console.log("Use effect:", formState.errors);
+	}, [formState]);
+
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<label>Nome Completo:</label>
-				<input required onChange={nomeUpdate}></input>
-				<button type="submit">Enviar</button>
-			</form>
-		</div>
+		<>
+			<h1 className="text-white text-center" style={{ marginTop: "50px" }}>
+				Cadastre-se
+			</h1>
+			<h2 className="text-white text-center" style={{ marginBottom: "50px" }}>
+				サインアップ
+			</h2>
+			<Container
+				fluid
+				className="d-flex justify-content-center"
+				style={{
+					marginTop: "50px",
+					alignContent: "center",
+					alignItems: "center",
+					justifyContent: "center",
+				}}>
+				<form
+					className="form"
+					onSubmit={handleSubmit(onSubmit, validarForm)}
+					method="POST"
+					action="/">
+					<Form.Group className="mb-3 fs-5">
+						<Form.Label className="text-white">Nome</Form.Label>
+						<MDBInput
+							{...register("nome", { required: true })}
+							label="Text input"
+							id="typeText"
+							type="text"
+							name="nome"
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.nome && (
+							<span className="error-message">Nome obrigatório</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3 fs-5">
+						<Form.Label className="text-white">E-mail</Form.Label>
+						<MDBInput
+							name="email"
+							label="Email input"
+							id="typeEmail"
+							{...register("email", {
+								message: "Email obrigatorio ou invalido",
+								required: true,
+								pattern:
+									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+							})}
+							type="email"
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.email && (
+							<span className="error-message">
+								Email obrigatório ou invalido
+							</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3 fs-5">
+						<Form.Label className="text-white">Idade</Form.Label>
+						<MDBInput
+							{...register("idade", { required: true })}
+							label="Number input"
+							id="typeNumber"
+							type="number"
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.idade && (
+							<span className="error-message">Idade obrigatória</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3 fs-5">
+						<Form.Label className="text-white">Sexo</Form.Label>
+						<Form.Check
+							type="checkbox"
+							{...register("sexo", { required: true })}
+							name="sexo"
+							className="text-white fs-6"
+							label="Masculino"></Form.Check>
+						<Form.Check
+							type="checkbox"
+							{...register("sexo", { required: true })}
+							name="sexo"
+							className="text-white fs-6"
+							label="Feminino"></Form.Check>
+						<Form.Check
+							type="checkbox"
+							{...register("sexo", { required: true })}
+							name="sexo"
+							className="text-white fs-6"
+							label="Outro"></Form.Check>
+						{errors.sexo && (
+							<span className="error-message">Sexo obrigatório</span>
+						)}
+					</Form.Group>
+
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Endereço</Form.Label>
+						<MDBInput
+							label="Text input"
+							id="typeText"
+							type="text"
+							name="endereco"
+							{...register("endereco", { required: true })}
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.endereco && (
+							<span className="error-message">Endereço obrigatório</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Cidade</Form.Label>
+						<MDBInput
+							label="Text input"
+							id="typeText"
+							type="text"
+							name="cidade"
+							{...register("cidade", { required: true })}
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.cidade && (
+							<span className="error-message">Cidade obrigatória</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Estado</Form.Label>
+						<MDBInput
+							label="Text input"
+							id="typeText"
+							type="text"
+							name="estado"
+							{...register("estado", { required: true })}
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.estado && (
+							<span className="error-message">Estado obrigatório</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Nome de Usuario</Form.Label>
+						<MDBInput
+							type="text"
+							name="nomeUsuario"
+							{...register("nomeUsuario", { required: true })}
+							placeholder="Nome de Usuario"
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.nomeUsuario && (
+							<span className="error-message">Nome de Usuário obrigatório</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Senha</Form.Label>
+						<MDBInput
+							label="Password input"
+							id="typePassword"
+							type="password"
+							name="senha"
+							{...register("senha", { required: true })}
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.senha && (
+							<span className="error-message">Senha obrigatória</span>
+						)}
+					</Form.Group>
+					<Form.Group className="mb-3">
+						<Form.Label className="text-white fs-5">Confirmar Senha</Form.Label>
+						<MDBInput
+							label="Password input"
+							id="typePassword"
+							type="password"
+							name="confirmarSenha"
+							{...register("confirmarSenha", { required: true })}
+							placeholder="Confirmar Senha"
+							style={{ width: "300px", alignContent: "center" }}
+						/>
+						{errors.confirmarSenha && (
+							<span className="error-message">Confirmar Senha</span>
+						)}
+					</Form.Group>
+					<Button
+						className="mt-3"
+						variant="dark"
+						type="submit"
+						style={{
+							marginTop: "50px",
+							width: "300px",
+							alignContent: "center",
+							marginBottom: "100px",
+						}}>
+						Cadastrar
+					</Button>
+				</form>
+			</Container>
+		</>
 	);
 };
 
-export default AddUsuario;
+export default CadastroForm;

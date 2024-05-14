@@ -17,7 +17,7 @@ async function connect() {
 connect();
 app.listen(8000, () => console.log("Servidor iniciado na porta 8000"));
 
-const userScshema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 	nome: String,
 	email: String,
 	senha: String,
@@ -33,3 +33,30 @@ app.get("/getUsers", async (req, res) => {
 		console.log(error);
 	}
 });
+
+app.post("/createUser", async (req, res) => {
+	try {
+		const { nome, email, senha } = req.body;
+		const userData = await UserModel.create({ nome, email, senha });
+		res.send(userData);
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+app.put("/updateUser/:id", async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { nome, email, senha } = req.body;
+		const userData = await UserModel.findByIdAndUpdate(id, {
+			nome,
+			email,
+			senha,
+		});
+		res.send(userData);
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+// eslint-disable-next-line no-undef
