@@ -1,9 +1,40 @@
 import { Button, Form, Container } from "react-bootstrap";
+import { MDBInput } from "mdb-react-ui-kit";
 import "./Custom.css";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 
 const CadastroForm = () => {
+	const [erros, setErros] = useState({});
+
+	const validarForm = (dados) => {
+		const erros = {};
+
+		if (!dados.nome.trim()) {
+			erros.nome = "Nome de usuario é necessario";
+		}
+
+		if (!dados.email.trim()) {
+			erros.email = "Email é necessario";
+		} else if (!/\S+@\S+\.\S+/.test(dados.email)) {
+			erros.email = "Email é invalido";
+		}
+
+		if (!dados.idade.trim()) {
+			erros.idade = "A idade é necessaria";
+		} else if (dados.idade > 100 && dados.idade << 0)
+			if (!dados.senha) {
+				erros.senha = "Senha é necessaria";
+			} else if (dados.senha.length < 8) {
+				erros.senha = "Senha deve ter pelo menos 8 caracteres";
+			}
+
+		if (dados.confirmarSenha !== dados.senha) {
+			erros.confirmarSenha = "Senhas não são iguais";
+		}
+		return erros;
+	};
+
 	const { register, handleSubmit } = useForm();
 	const [form, setForm] = useState({
 		apelido: "",
@@ -85,44 +116,41 @@ const CadastroForm = () => {
 					method="POST"
 					action="/">
 					<Form.Group className="mb-3 fs-5">
-						<Form.Label className="text-white">Apelido</Form.Label>
-						<Form.Control
-							type="text"
-							name="apelido"
-							onChange={(e) => setForm({ ...form, apelido: e.target.value })}
-							style={{ width: "300px", alignContent: "center" }}
-						/>
-					</Form.Group>
-					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Nome</Form.Label>
-						<Form.Control
+						<MDBInput
 							onChange={(e) => setForm({ ...form, nome: e.target.value })}
+							label="Text input"
+							id="typeText"
 							type="text"
-							name="nome"
-							placeholder="Nome"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.nome && <span className="error-message">{erros.nome}</span>}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">E-mail</Form.Label>
-						<Form.Control
+						<MDBInput
 							onChange={(e) => setForm({ ...form, email: e.target.value })}
+							label="Email input"
+							id="typeEmail"
 							type="email"
-							name="email"
-							placeholder="E-mail"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.email && (
+							<span className="error-message">{erros.email}</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Idade</Form.Label>
-						<Form.Control
+						<MDBInput
 							onChange={(e) => setForm({ ...form, idade: e.target.value })}
+							label="Number input"
+							id="typeNumber"
 							type="number"
-							name="idade"
-							placeholder="Idade"
-							min="18"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.idade && (
+							<span className="error-message">{erros.idade}</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Sexo</Form.Label>
@@ -147,37 +175,40 @@ const CadastroForm = () => {
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Endereço</Form.Label>
-						<Form.Control
+						<MDBInput
+							label="Text input"
+							id="typeText"
 							type="text"
-							name="endereco"
 							onChange={(e) => setForm({ ...form, endereco: e.target.value })}
-							placeholder="Endereço"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.endereco && (
+							<span className="error-message">{erros.endereco}</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Cidade</Form.Label>
-						<Form.Control
+						<MDBInput
+							label="Text input"
+							id="typeText"
 							type="text"
-							name="cidade"
 							onChange={(e) => setForm({ ...form, cidade: e.target.value })}
-							placeholder="Cidade"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Estado</Form.Label>
-						<Form.Control
+						<MDBInput
+							label="Text input"
+							id="typeText"
 							type="text"
-							name="estado"
 							onChange={(e) => setForm({ ...form, estado: e.target.value })}
-							placeholder="Estado"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Nome de Usuario</Form.Label>
-						<Form.Control
+						<MDBInput
 							type="text"
 							name="nomeUsuario"
 							onChange={(e) =>
@@ -189,25 +220,32 @@ const CadastroForm = () => {
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Senha</Form.Label>
-						<Form.Control
+						<MDBInput
+							label="Password input"
+							id="typePassword"
 							type="password"
-							name="senha"
 							onChange={(e) => setForm({ ...form, senha: e.target.value })}
-							placeholder="Senha"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.senha && (
+							<span className="error-message">{erros.senha}</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Confirmar Senha</Form.Label>
-						<Form.Control
+						<MDBInput
+							label="Password input"
+							id="typePassword"
 							type="password"
-							name="confirmarSenha"
 							onChange={(e) =>
 								setForm({ ...form, confirmarSenha: e.target.value })
 							}
 							placeholder="Confirmar Senha"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{erros.confirmarSenha && (
+							<span className="error-message">{erros.confirmarSenha}</span>
+						)}
 					</Form.Group>
 					<Button
 						className="mt-3"

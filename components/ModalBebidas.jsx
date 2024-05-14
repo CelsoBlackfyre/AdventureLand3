@@ -67,7 +67,9 @@ export default function ModalBebida() {
 								</MDBCardText>
 							</MDBCardBody>
 						</MDBCard>
-						<MDBBtn onClick={toggleOpen}>Confira</MDBBtn>
+						<MDBBtn onClick={toggleOpen} className="fs-1">
+							Confira
+						</MDBBtn>
 
 						<MDBModal
 							staticBackdrop
