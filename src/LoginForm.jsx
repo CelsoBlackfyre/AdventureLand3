@@ -89,7 +89,7 @@ const LoginForm = () => {
 							marginTop: "50px",
 							width: "300px",
 							alignContent: "center",
-							fontSize: "1.4em",
+							fontSize: "15",
 							padding: " 7px 7px 7px 7px",
 							borderRadius: "0.5em",
 							border: "none",
