@@ -10,6 +10,7 @@ import WebFont from "webfontloader";
 import { useEffect } from "react";
 import Jersey25 from "../components/font.jsx";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import "../styles.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

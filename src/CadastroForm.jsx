@@ -4,7 +4,7 @@ import { MDBInput } from "mdb-react-ui-kit";
 // import "./Custom.css";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import "./form.css";
+// import "./form.css";
 
 const CadastroForm = () => {
 	// const [errors, setErros] = useState({});
