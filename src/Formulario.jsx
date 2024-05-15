@@ -105,6 +105,7 @@ const CadastroForm = () => {
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">E-mail</Form.Label>
 						<MDBInput
+							className="formS"
 							name="email"
 							label="Email input"
 							id="typeEmail"

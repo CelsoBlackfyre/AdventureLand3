@@ -1,97 +1,65 @@
 import { Button, Form, Container } from "react-bootstrap";
+import React from "react";
 import { MDBInput } from "mdb-react-ui-kit";
-import "./Custom.css";
+// import "./Custom.css";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import "./form.css";
 
 const CadastroForm = () => {
-	const [erros, setErros] = useState({});
+	// const [errors, setErros] = useState({});
 
 	const validarForm = (dados) => {
-		const erros = {};
+		const errors = {};
 
-		if (!dados.nome.trim()) {
-			erros.nome = "Nome de usuario é necessario";
+		if (!dados.nome) {
+			errors.nome = "Nome de usuario é necessario";
 		}
 
-		if (!dados.email.trim()) {
-			erros.email = "Email é necessario";
+		if (!dados.email) {
+			errors.email = "Email é necessario";
 		} else if (!/\S+@\S+\.\S+/.test(dados.email)) {
-			erros.email = "Email é invalido";
+			errors.email = "Email é invalido";
 		}
 
-		if (!dados.idade.trim()) {
-			erros.idade = "A idade é necessaria";
+		if (!dados.idade) {
+			errors.idade = "A idade é necessaria";
 		} else if (dados.idade > 100 && dados.idade << 0)
 			if (!dados.senha) {
-				erros.senha = "Senha é necessaria";
+				errors.senha = "Senha é necessaria";
 			} else if (dados.senha.length < 8) {
-				erros.senha = "Senha deve ter pelo menos 8 caracteres";
+				errors.senha = "Senha deve ter pelo menos 8 caracteres";
 			}
 
 		if (dados.confirmarSenha !== dados.senha) {
-			erros.confirmarSenha = "Senhas não são iguais";
+			errors.confirmarSenha = "Senhas não são iguais";
 		}
-		return erros;
+		return errors;
 	};
 
-	const { register, handleSubmit } = useForm();
-	const [form, setForm] = useState({
-		apelido: "",
-		nome: "",
-		email: "",
-		idade: "",
-		sexo: "",
-		endereco: "",
-		cidade: "",
-		estado: "",
-		nomeUsuario: "",
-		senha: "",
-		confirmarSenha: "",
+	const {
+		register,
+		handleSubmit,
+		formState,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			nome: "",
+			email: "",
+			idade: "",
+			senha: "",
+			confirmarSenha: "",
+			cidade: "",
+			estado: "",
+		},
 	});
 
 	const onSubmit = (data) => {
 		console.log(data);
 	};
-
-	const onChange = (e) => {
-		const { name, value } = e.target;
-		setForm((prevForm) => ({ ...prevForm, [name]: value }));
-	};
-
-	useEffect(() => {
-		const loadFormData = () => {
-			setForm({
-				apelido: localStorage.getItem("apelido") || "",
-				nome: localStorage.getItem("nome") || "",
-				email: localStorage.getItem("email") || "",
-				idade: localStorage.getItem("idade") || "",
-				sexo: localStorage.getItem("sexo") || "",
-				endereco: localStorage.getItem("endereco") || "",
-				cidade: localStorage.getItem("cidade") || "",
-				estado: localStorage.getItem("estado") || "",
-				nomeUsuario: localStorage.getItem("nomeUsuario") || "",
-				senha: localStorage.getItem("senha") || "",
-				confirmarSenha: localStorage.getItem("confirmarSenha") || "",
-			});
-		};
-
-		loadFormData();
-	}, []);
-
-	useEffect(() => {
-		localStorage.setItem("apelido", form.apelido);
-		localStorage.setItem("nome", form.nome);
-		localStorage.setItem("email", form.email);
-		localStorage.setItem("idade", form.idade);
-		localStorage.setItem("sexo", form.sexo);
-		localStorage.setItem("endereco", form.endereco);
-		localStorage.setItem("cidade", form.cidade);
-		localStorage.setItem("estado", form.estado);
-		localStorage.setItem("nomeUsuario", form.nomeUsuario);
-		localStorage.setItem("senha", form.senha);
-		localStorage.setItem("confirmarSenha", form.confirmarSenha);
-	}, [form]);
+	React.useEffect(() => {
+		console.log("Use effect:", formState.errors);
+	}, [formState]);
 
 	return (
 		<>
@@ -112,78 +80,109 @@ const CadastroForm = () => {
 				}}>
 				<form
 					className="form"
-					onSubmit={handleSubmit(onSubmit)}
+					onSubmit={handleSubmit(onSubmit, validarForm)}
+					noValidate
 					method="POST"
 					action="/">
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Nome</Form.Label>
 						<MDBInput
-							onChange={(e) => setForm({ ...form, nome: e.target.value })}
+							{...register("nome", { required: true })}
 							label="Text input"
 							id="typeText"
 							type="text"
+							name="nome"
+							aria-invalid={errors ? "true" : "false"}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.nome && <span className="error-message">{erros.nome}</span>}
+						<label htmlFor="typeText" className="label"></label>
+						<input
+							type="text"
+							placeholder="Digite seu nome"
+							className="input"
+							name="nome"
+						/>
+						{errors.nome && errors.nome.type === "required" && (
+							<span role="alert">Isso é necessario</span>
+						)}
+						{errors.nome && errors.nome.type === "maxLength" && (
+							<span>Nome muito grande</span>
+						)}
 					</Form.Group>
-					<Form.Group className="mb-3 fs-5">
+					<Form.Group className="teste">
 						<Form.Label className="text-white">E-mail</Form.Label>
 						<MDBInput
-							onChange={(e) => setForm({ ...form, email: e.target.value })}
+							className="formS"
+							name="email"
 							label="Email input"
 							id="typeEmail"
+							{...register("email", {
+								message: "Email obrigatorio ou invalido",
+								required: true,
+								pattern:
+									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+							})}
 							type="email"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.email && (
-							<span className="error-message">{erros.email}</span>
+						<label htmlFor="typeEmail" className="label"></label>
+						<input type="email" name="email" />
+						{errors.email && (
+							<span className="error-message">
+								Email obrigatório ou invalido
+							</span>
 						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Idade</Form.Label>
 						<MDBInput
-							onChange={(e) => setForm({ ...form, idade: e.target.value })}
+							{...register("idade", { required: true })}
 							label="Number input"
 							id="typeNumber"
 							type="number"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.idade && (
-							<span className="error-message">{erros.idade}</span>
+						{errors.idade && (
+							<span className="error-message">Idade obrigatória</span>
 						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">Sexo</Form.Label>
 						<Form.Check
 							type="checkbox"
-							onChange={(e) => setForm({ ...form, sexo: e.target.value })}
+							{...register("sexo", { required: true })}
 							name="sexo"
 							className="text-white fs-6"
 							label="Masculino"></Form.Check>
 						<Form.Check
 							type="checkbox"
-							onChange={(e) => setForm({ ...form, sexo: e.target.value })}
+							{...register("sexo", { required: true })}
 							name="sexo"
 							className="text-white fs-6"
 							label="Feminino"></Form.Check>
 						<Form.Check
 							type="checkbox"
-							onChange={(e) => setForm({ ...form, sexo: e.target.value })}
+							{...register("sexo", { required: true })}
 							name="sexo"
 							className="text-white fs-6"
 							label="Outro"></Form.Check>
+						{errors.sexo && (
+							<span className="error-message">Sexo obrigatório</span>
+						)}
 					</Form.Group>
+
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Endereço</Form.Label>
 						<MDBInput
 							label="Text input"
 							id="typeText"
 							type="text"
-							onChange={(e) => setForm({ ...form, endereco: e.target.value })}
+							name="endereco"
+							{...register("endereco", { required: true })}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.endereco && (
-							<span className="error-message">{erros.endereco}</span>
+						{errors.endereco && (
+							<span className="error-message">Endereço obrigatório</span>
 						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
@@ -192,9 +191,13 @@ const CadastroForm = () => {
 							label="Text input"
 							id="typeText"
 							type="text"
-							onChange={(e) => setForm({ ...form, cidade: e.target.value })}
+							name="cidade"
+							{...register("cidade", { required: true })}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{errors.cidade && (
+							<span className="error-message">Cidade obrigatória</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Estado</Form.Label>
@@ -202,21 +205,26 @@ const CadastroForm = () => {
 							label="Text input"
 							id="typeText"
 							type="text"
-							onChange={(e) => setForm({ ...form, estado: e.target.value })}
+							name="estado"
+							{...register("estado", { required: true })}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{errors.estado && (
+							<span className="error-message">Estado obrigatório</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Nome de Usuario</Form.Label>
 						<MDBInput
 							type="text"
 							name="nomeUsuario"
-							onChange={(e) =>
-								setForm({ ...form, nomeUsuario: e.target.value })
-							}
+							{...register("nomeUsuario", { required: true })}
 							placeholder="Nome de Usuario"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{errors.nomeUsuario && (
+							<span className="error-message">Nome de Usuário obrigatório</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
 						<Form.Label className="text-white fs-5">Senha</Form.Label>
@@ -224,11 +232,26 @@ const CadastroForm = () => {
 							label="Password input"
 							id="typePassword"
 							type="password"
-							onChange={(e) => setForm({ ...form, senha: e.target.value })}
+							name="senha"
+							{...register("senha", { required: true })}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.senha && (
-							<span className="error-message">{erros.senha}</span>
+						{errors.senha && (
+							<span className="error-message">Senha obrigatória</span>
+						)}
+						<label htmlFor="typePassword" className="label">
+							Senha
+						</label>
+						<div className="textInputWrapper">
+							<input
+								placeholder="digite sua senha"
+								type="password"
+								className="input"
+								{...register("senha", { required: true })}
+							/>
+						</div>
+						{errors.senha && (
+							<span className="error-message">Senha obrigatória</span>
 						)}
 					</Form.Group>
 					<Form.Group className="mb-3">
@@ -237,14 +260,13 @@ const CadastroForm = () => {
 							label="Password input"
 							id="typePassword"
 							type="password"
-							onChange={(e) =>
-								setForm({ ...form, confirmarSenha: e.target.value })
-							}
+							name="confirmarSenha"
+							{...register("confirmarSenha", { required: true })}
 							placeholder="Confirmar Senha"
 							style={{ width: "300px", alignContent: "center" }}
 						/>
-						{erros.confirmarSenha && (
-							<span className="error-message">{erros.confirmarSenha}</span>
+						{errors.confirmarSenha && (
+							<span className="error-message">Confirmar Senha</span>
 						)}
 					</Form.Group>
 					<Button

@@ -18,7 +18,8 @@ function App() {
 	return (
 		<>
 			<div className="App">
-				<LoginForm />
+				<h1 className="text-3xl font-bold underline">TESTE</h1>
+				<CadastroForm />
 				{/*<CadastroForm />
 				<Alimentacao />
 				 <AppHeader />

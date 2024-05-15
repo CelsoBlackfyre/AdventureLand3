@@ -1,62 +1,27 @@
-* {
-	box-sizing: border-box;
+.input {
+	background-color: #383838;
+	border: 1ex solid none;
+	border-top-width: 1.7em;
 	margin: 0;
 	padding: 0;
+	color: #383838;
+	word-wrap: break-word;
+	outline: 7px solid #383838;
+	height: 30px;
+	font-size: 17px;
+	text-align: center;
+	transition: all 1s;
+	max-width: 190px;
+	font-weight: bold;
+	font-family: "Courier New", Courier, monospace;
 }
 
-span {
-	color: red;
-}
-
-.container {
-	display: flex;
-	flex-direction: column;
-	gap: 7px;
-	position: relative;
-	color: white;
-}
-
-.container .label {
-	font-size: 15px;
-	padding-left: 10px;
-	position: absolute;
-	top: 13px;
-	transition: 0.3s;
-	pointer-events: none;
-}
-
-.input {
-	width: 200px;
-	height: 45px;
-	border: none;
-	outline: none;
-	padding: 0px 7px;
-	border-radius: 6px;
-	color: #fff;
-	font-size: 15px;
-	background-color: transparent;
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
-		-1px -1px 6px rgba(255, 255, 255, 0.4);
+.input:hover {
+	border-top-width: 0.2em;
+	background-color: #f1e8e8;
 }
 
 .input:focus {
-	border: 2px solid transparent;
-	color: #fff;
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
-		-1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
-		inset -1px -1px 6px rgba(255, 255, 255, 0.4);
-}
-
-.container .input:valid ~ .label,
-.container .input:focus ~ .label {
-	transition: 0.3s;
-	padding-left: 2px;
-	transform: translateY(-35px);
-}
-
-.container .input:valid,
-.container .input:focus {
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
-		-1px -1px 6px rgba(255, 255, 255, 0.4), inset 3px 3px 10px rgba(0, 0, 0, 1),
-		inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+	border-top-width: 0.2em;
+	background-color: #f1e8e8;
 }
