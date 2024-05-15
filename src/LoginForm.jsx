@@ -43,7 +43,20 @@ const LoginForm = () => {
 							placeholder="Digite seu email"
 							name="email"
 							onChange={onChange}
-							style={{ width: "300px", alignContent: "center" }}
+							style={{
+								alignContent: "center",
+								width: "200",
+								height: "200",
+								border: "none",
+								outline: "none",
+								padding: "7px 7px 7px 7px ",
+								borderRadius: "6px",
+								color: "#fff",
+								fontSize: "15",
+								backgroundColor: "#191919",
+								boxShadow:
+									"3px 3px 10px rgba(0, 0, 0, 1), -1px -1px 6px rgba(255, 255, 255, 0.4)",
+							}}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
@@ -53,7 +66,20 @@ const LoginForm = () => {
 							placeholder="Digite sua senha"
 							name="senha"
 							onChange={onChange}
-							style={{ width: "300px", alignContent: "center" }}
+							style={{
+								alignContent: "center",
+								width: "200",
+								height: "45",
+								border: "none",
+								outline: "none",
+								padding: "7px 7px 7px 7px ",
+								borderRadius: "6px",
+								color: "#fff",
+								fontSize: "15",
+								backgroundColor: "#191919",
+								boxShadow:
+									"3px 3px 10px rgba(0, 0, 0, 1), -1px -1px 6px rgba(255, 255, 255, 0.4)",
+							}}
 						/>
 					</Form.Group>
 					<Button
@@ -63,6 +89,14 @@ const LoginForm = () => {
 							marginTop: "50px",
 							width: "300px",
 							alignContent: "center",
+							fontSize: "1.4em",
+							padding: " 7px 7px 7px 7px",
+							borderRadius: "0.5em",
+							border: "none",
+							backgroundColor: "#000",
+							color: "#fff",
+							cursor: "pointer",
+							boxShadow: "2px 2px 3px #000000b4",
 						}}>
 						Login
 					</Button>

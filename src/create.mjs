@@ -8,8 +8,8 @@ async function run() {
 		const database = client.db("AdventureLand");
 		const teste = database.collection("teste");
 		const doc = {
-			nome: "Clark Kent",
-			email: "clark@example.com",
+			nome: "Daniel Horacio",
+			email: "daniel@example.com",
 		};
 		const result = await teste.insertOne(doc);
 
