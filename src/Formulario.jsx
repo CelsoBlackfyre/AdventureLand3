@@ -1,7 +1,7 @@
 import { Button, Form, Container } from "react-bootstrap";
 import React from "react";
 import { MDBInput } from "mdb-react-ui-kit";
-import "./Custom.css";
+// import "./Custom.css";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import "./form.css";
@@ -12,17 +12,17 @@ const CadastroForm = () => {
 	const validarForm = (dados) => {
 		const errors = {};
 
-		if (!dados.nome.trim()) {
+		if (!dados.nome) {
 			errors.nome = "Nome de usuario é necessario";
 		}
 
-		if (!dados.email.trim()) {
+		if (!dados.email) {
 			errors.email = "Email é necessario";
 		} else if (!/\S+@\S+\.\S+/.test(dados.email)) {
 			errors.email = "Email é invalido";
 		}
 
-		if (!dados.idade.trim()) {
+		if (!dados.idade) {
 			errors.idade = "A idade é necessaria";
 		} else if (dados.idade > 100 && dados.idade << 0)
 			if (!dados.senha) {
@@ -81,6 +81,7 @@ const CadastroForm = () => {
 				<form
 					className="form"
 					onSubmit={handleSubmit(onSubmit, validarForm)}
+					noValidate
 					method="POST"
 					action="/">
 					<Form.Group className="mb-3 fs-5">
@@ -91,8 +92,15 @@ const CadastroForm = () => {
 							id="typeText"
 							type="text"
 							name="nome"
+							aria-invalid={errors ? "true" : "false"}
 							style={{ width: "300px", alignContent: "center" }}
 						/>
+						{errors.nome && errors.nome.type === "required" && (
+							<span role="alert">Isso é necessario</span>
+						)}
+						{errors.nome && errors.nome.type === "maxLength" && (
+							<span>Nome muito grande</span>
+						)}
 					</Form.Group>
 					<Form.Group className="mb-3 fs-5">
 						<Form.Label className="text-white">E-mail</Form.Label>
@@ -104,9 +112,7 @@ const CadastroForm = () => {
 								message: "Email obrigatorio ou invalido",
 								required: true,
 								pattern:
-									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,{
-									setErros({ email: "Email obrigatorio ou invalido" });
-									}
+									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 							})}
 							type="email"
 							style={{ width: "300px", alignContent: "center" }}
